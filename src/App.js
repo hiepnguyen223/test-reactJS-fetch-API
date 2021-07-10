@@ -19,12 +19,16 @@ function App() {
   useEffect ( () => {
 
     async function fetchPostList () {
-      const paramsString = queryString.stringify(filters);
-      const requestUrl = `http://js-post-api.herokuapp.com/api/posts?${paramsString}`;
-      const response = await fetch(requestUrl);
-      const responseJSON = await response.json();
-      setPostList(responseJSON.data);
-      setPagination(responseJSON.pagination);
+      try {
+        const paramsString = queryString.stringify(filters);
+        const requestUrl = `http://js-post-api.herokuapp.com/api/posts?${paramsString}`;
+        const response = await fetch(requestUrl);
+        const responseJSON = await response.json();
+        setPostList(responseJSON.data);
+        setPagination(responseJSON.pagination);
+      } catch (error) {
+        console.log('error: ' + error.message);
+      }
     }
 
     fetchPostList();
