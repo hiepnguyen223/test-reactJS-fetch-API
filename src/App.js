@@ -20,7 +20,6 @@ function App() {
 
     async function fetchPostList () {
       const paramsString = queryString.stringify(filters);
-      console.log(paramsString);
       const requestUrl = `http://js-post-api.herokuapp.com/api/posts?${paramsString}`;
       const response = await fetch(requestUrl);
       const responseJSON = await response.json();
