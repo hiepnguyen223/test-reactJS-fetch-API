@@ -3,6 +3,7 @@ import './App.css';
 import PostList from './features/PostList'
 import Pagination from './features/Pagination'
 import queryString from 'query-string'
+import SearchForm from './features/SearchForm'
 function App() {
 
   const [postList, setPostList] = useState([]);
@@ -42,8 +43,17 @@ function App() {
     setFilters(temp);
   }
 
+  function handleSearchForm (value) {
+    setFilters({
+      ...filters,
+      _page: 1,
+      title_like: value,
+    })
+  }
+
   return (
     <div className="App">
+      <SearchForm onSubmit = {handleSearchForm}/>
       <PostList posts = {postList}/>
       <Pagination pagination = {pagination} onPageChange = {handlePageChange}/>
     </div>
